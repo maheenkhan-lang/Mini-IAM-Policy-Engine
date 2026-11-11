@@ -53,11 +53,11 @@ public class Role {
         this.description = description;
     }
 
-    public Set<permission> getpermissions() {
+    public Set<permission> getPermissions() {
         return permissions;
     }
 
-    public void setpermissions(Set<permission> permissions) {
+    public void setPermissions(Set<permission> permissions) {
         this.permissions = permissions;
     }
 }

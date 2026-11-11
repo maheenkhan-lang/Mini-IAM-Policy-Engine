@@ -3,6 +3,7 @@ package com.iam.mini_iam.entity;
 import jakarta.persistence.*;
 import java.util.Set;
 import java.util.HashSet;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "users")
@@ -15,6 +16,8 @@ public class User {
     private String username;
     private String email;
     private String department;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+private String password;
 
     @ManyToMany
     @JoinTable(
@@ -59,6 +62,13 @@ public class User {
 
     public void setDepartment(String department) {
         this.department = department;
+    }
+
+    public String getPassword(){
+        return password;
+    }
+    public void setPassword(String password){
+        this.password = password;
     }
 
     public Set<Role> getRoles() {
