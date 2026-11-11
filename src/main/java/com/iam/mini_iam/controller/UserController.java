@@ -1,0 +1,51 @@
+package com.iam.mini_iam.controller;
+
+import com.iam.mini_iam.entity.User;
+import com.iam.mini_iam.repository.UserRepository;
+
+import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/users")
+public class UserController {
+
+    private final UserRepository userRepository;
+
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    // Create a new user
+    @PostMapping
+    public User createUser(@RequestBody User user) {
+        return userRepository.save(user);
+    }
+
+    // Get all users
+    @GetMapping
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    // Get user by ID
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+        return userRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    // Delete user
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        if (!userRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        userRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+}
