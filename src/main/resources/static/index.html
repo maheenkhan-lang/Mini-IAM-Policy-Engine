@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini IAM | Login</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="login-container">
+
+        <div class="login-left">
+            <div class="brand">
+                <div class="brand-icon">M</div>
+                <span>Mini IAM</span>
+            </div>
+
+            <div class="welcome-text">
+                <p class="tagline">IDENTITY & ACCESS MANAGEMENT</p>
+                <h1>Secure access.<br>Complete control.</h1>
+                <p>
+                    Manage users, roles, permissions and cloud
+                    resources from one secure platform.
+                </p>
+            </div>
+
+            <div class="login-footer">
+                MINI IAM POLICY ENGINE · 2026
+            </div>
+        </div>
+
+        <div class="login-right">
+            <div class="login-box">
+
+                <h2>Welcome back</h2>
+                <p class="subtitle">Sign in to access your dashboard.</p>
+
+                <form id="loginForm">
+
+                    <label for="username">Username</label>
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="Enter your username"
+                        autocomplete="username"
+                        required
+                    >
+
+                    <label for="password">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <p id="errorMessage"></p>
+
+                    <button type="submit" id="loginButton">
+                        Sign In
+                    </button>
+
+                </form>
+
+                <p class="secure-note">
+                    <span>●</span> Secure authentication powered by JWT
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script src="js/login.js"></script>
+</body>
+</html>

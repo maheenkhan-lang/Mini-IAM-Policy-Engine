@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini IAM | Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dashboard-body">
+
+    <div class="app-layout">
+
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">M</div>
+                <span>Mini IAM</span>
+            </div>
+
+            <p class="nav-heading">MAIN MENU</p>
+
+            <nav>
+                <a href="#overview" class="nav-link active" data-section="overview">▦ Dashboard</a>
+                <a href="#users" class="nav-link" data-section="users">♙ Users</a>
+                <a href="#roles" class="nav-link" data-section="roles">♧ Roles & Permissions</a>
+                <a href="#resources" class="nav-link" data-section="resources">▣ Cloud Resources</a>
+                <a href="#policy" class="nav-link" data-section="policy">⚙ Policy Checker</a>
+                <a href="#audit" class="nav-link" data-section="audit">☷ Audit Logs</a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <p>IDENTITY MANAGEMENT</p>
+                <span>Mini IAM Policy Engine</span>
+            </div>
+        </aside>
+
+        <main class="main-content">
+
+            <header class="topbar">
+                <div>
+                    <p class="topbar-label">WORKSPACE / OVERVIEW</p>
+                    <h2 id="pageTitle">Dashboard</h2>
+                </div>
+
+                <div class="profile">
+                    <div class="avatar" id="userAvatar">U</div>
+                    <div>
+                        <strong id="displayUsername">User</strong>
+                        <p id="displayDepartment">Department</p>
+                    </div>
+                    <button class="logout-button" id="logoutButton">Logout</button>
+                </div>
+            </header>
+
+            <section class="content-section active" id="overview">
+
+                <div class="welcome-banner">
+                    <div>
+                        <p class="tagline">IDENTITY & ACCESS MANAGEMENT</p>
+                        <h1>Welcome back, <span id="welcomeName">User</span></h1>
+                        <p>Manage identities, permissions and cloud resources securely.</p>
+                    </div>
+                    <div class="welcome-symbol">M</div>
+                </div>
+
+                <h3 class="section-heading">Overview</h3>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <p>Total Users</p>
+                        <h2 id="totalUsers">--</h2>
+                        <span>Registered identities</span>
+                    </div>
+
+                    <div class="stat-card">
+                        <p>Roles</p>
+                        <h2 id="totalRoles">3</h2>
+                        <span>Access categories</span>
+                    </div>
+
+                    <div class="stat-card">
+                        <p>Permissions</p>
+                        <h2 id="totalPermissions">--</h2>
+                        <span>Available actions</span>
+                    </div>
+
+                    <div class="stat-card">
+                        <p>Cloud Resources</p>
+                        <h2 id="totalResources">--</h2>
+                        <span>Managed resources</span>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <div>
+                            <h3>Quick Access</h3>
+                            <p>Navigate to your management tools.</p>
+                        </div>
+                    </div>
+
+                    <div class="quick-grid">
+                        <button class="quick-card" data-go="users">
+                            <span>♙</span>
+                            <strong>Manage Users</strong>
+                            <small>View and manage identities</small>
+                        </button>
+
+                        <button class="quick-card" data-go="roles">
+                            <span>♧</span>
+                            <strong>Manage Roles</strong>
+                            <small>Control access permissions</small>
+                        </button>
+
+                        <button class="quick-card" data-go="resources">
+                            <span>▣</span>
+                            <strong>Cloud Resources</strong>
+                            <small>Manage virtual resources</small>
+                        </button>
+
+                        <button class="quick-card" data-go="audit">
+                            <span>☷</span>
+                            <strong>Audit Logs</strong>
+                            <small>Review access activity</small>
+                        </button>
+                    </div>
+                </div>
+
+            </section>
+
+           <section class="content-section" id="users">
+
+    <div class="page-intro">
+        <h2>User Management</h2>
+        <p>View, create and manage registered users.</p>
+    </div>
+
+    <div class="panel">
+        <h3>Add New User</h3>
+
+        <form id="addUserForm">
+
+            <label for="newUsername">Username</label>
+            <input type="text" id="newUsername" required>
+
+            <label for="newEmail">Email</label>
+            <input type="email" id="newEmail" required>
+
+            <label for="newDepartment">Department</label>
+            <input type="text" id="newDepartment" required>
+
+            <label for="newPassword">Password</label>
+            <input type="password" id="newPassword" required>
+
+            <label for="newUserRole">Assign Role</label>
+            <select id="newUserRole" required>
+                <option value="1">ADMIN</option>
+                <option value="2">DEVELOPER</option>
+                <option value="3">VIEWER</option>
+            </select>
+
+            <button type="submit">Create User</button>
+            <p id="userMessage"></p>
+
+        </form>
+    </div>
+
+    <div class="panel">
+
+        <div class="panel-header">
+            <h3>Registered Users</h3>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                        <th>Roles</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="usersTable">
+                    <tr>
+                        <td colspan="6">Users will appear here.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</section>
+            <section class="content-section" id="roles">
+
+    <div class="page-intro">
+        <h2>Roles & Permissions</h2>
+        <p>Manage access levels and understand role-based authorization.</p>
+    </div>
+
+    <div class="role-grid">
+
+        <div class="role-card">
+            <span class="role-tag admin">ADMIN</span>
+            <h3>Administrator</h3>
+            <p>Full system access, including user, role and resource management.</p>
+            <div class="role-access">Full Access</div>
+        </div>
+
+        <div class="role-card">
+            <span class="role-tag developer">DEVELOPER</span>
+            <h3>Developer</h3>
+            <p>Development operations and permitted cloud resource management.</p>
+            <div class="role-access">Limited Access</div>
+        </div>
+
+        <div class="role-card">
+            <span class="role-tag viewer">VIEWER</span>
+            <h3>Viewer</h3>
+            <p>Read-only access to resources and information permitted by policy.</p>
+            <div class="role-access">Read Only</div>
+        </div>
+
+    </div>
+
+    <div class="panel">
+        <div class="panel-header">
+            <h3>Permission Categories</h3>
+            <p>Actions supported by the Mini IAM policy engine.</p>
+        </div>
+
+        <div class="permission-list">
+            <div class="permission-item">
+                <strong>Virtual Machines</strong>
+                <span>CREATE · VIEW · START · STOP · DELETE</span>
+            </div>
+
+            <div class="permission-item">
+                <strong>Users</strong>
+                <span>CREATE · VIEW</span>
+            </div>
+
+            <div class="permission-item">
+                <strong>Storage</strong>
+                <span>CREATE · VIEW · DELETE</span>
+            </div>
+
+            <div class="permission-item">
+                <strong>Databases</strong>
+                <span>CREATE · VIEW · DELETE</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-header">
+            <h3>Access Control Model</h3>
+            <p>How the system decides whether an operation is allowed.</p>
+        </div>
+
+        <div class="access-flow">
+            <div class="flow-card">User Identity</div>
+            <span>→</span>
+            <div class="flow-card">Assigned Role</div>
+            <span>→</span>
+            <div class="flow-card">Permissions</div>
+            <span>→</span>
+            <div class="flow-card">Policy Decision</div>
+        </div>
+
+        <p class="muted-text">
+            The Policy Engine evaluates RBAC permissions and additional
+            attribute-based restrictions, including department and working hours.
+        </p>
+    </div>
+
+</section>
+
+            <section class="content-section" id="resources">
+
+    <div class="page-intro">
+        <h2>Cloud Resources</h2>
+        <p>Create and manage your simulated cloud infrastructure.</p>
+    </div>
+
+    <div class="panel">
+        <h3>Create Cloud Resource</h3>
+
+        <form id="resourceForm">
+
+            <label for="resourceName">Resource Name</label>
+            <input type="text" id="resourceName"
+                   placeholder="e.g. Test-VM" required>
+
+            <label for="resourceType">Resource Type</label>
+            <select id="resourceType" required>
+                <option value="VM">Virtual Machine</option>
+                <option value="STORAGE">Storage</option>
+                <option value="DATABASE">Database</option>
+            </select>
+
+            <label for="resourceRegion">Region</label>
+            <input type="text" id="resourceRegion"
+                   placeholder="e.g. ap-south-1" required>
+
+            <button type="submit">Create Resource</button>
+            <p id="resourceMessage"></p>
+
+        </form>
+    </div>
+
+    <div class="panel">
+        <div class="panel-header">
+            <h3>Available Resources</h3>
+            <p>Resources visible to your account.</p>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Region</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="resourcesTable">
+                    <tr>
+                        <td colspan="6">Resources will appear here.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</section>
+
+           <!-- POLICY CHECKER SECTION -->
+<section id="policy" class="content-section">
+
+    <div class="page-intro">
+        <h2>Policy Checker</h2>
+        <p>Evaluate whether a user is allowed to perform an action on a resource.</p>
+    </div>
+
+    <div class="panel policy-panel">
+
+        <h3>Access Control Test</h3>
+        <p>Select an action and resource to evaluate the access policy.</p>
+
+        <form id="policyForm">
+
+            <label for="policyAction">Action</label>
+            <select id="policyAction" required>
+                <option value="VIEW">VIEW</option>
+                <option value="CREATE">CREATE</option>
+                <option value="DELETE">DELETE</option>
+                <option value="START">START</option>
+                <option value="STOP">STOP</option>
+            </select>
+
+            <label for="policyResource">Resource</label>
+            <select id="policyResource" required>
+                <option value="VM">Virtual Machine (VM)</option>
+                <option value="USER">User</option>
+                <option value="STORAGE">Storage</option>
+                <option value="DATABASE">Database</option>
+            </select>
+
+            <button type="submit">Evaluate Access</button>
+
+        </form>
+
+        <div id="policyResult" class="policy-result">
+            Your access decision will appear here.
+        </div>
+
+    </div>
+
+    <div class="panel">
+
+        <h3>How the Policy Engine Works</h3>
+
+        <ul>
+            <li>
+                <strong>RBAC:</strong>
+                Checks whether your assigned role has the required permission.
+            </li>
+
+            <li>
+                <strong>Time-based Access:</strong>
+                Restricts policy-protected actions to 9 AM–5 PM.
+            </li>
+
+            <li>
+                <strong>ABAC:</strong>
+                Applies department-based access rules where configured.
+            </li>
+
+            <li>
+                <strong>Audit Logging:</strong>
+                Records access decisions for review.
+            </li>
+        </ul>
+
+    </div>
+
+</section>
+<!-- END POLICY CHECKER SECTION -->
+
+            <section class="content-section" id="audit">
+
+    <div class="page-intro">
+        <h2>Audit Logs</h2>
+        <p>Monitor access requests and authorization decisions.</p>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <p>Total Requests</p>
+            <h2 id="auditTotal">--</h2>
+            <span>Recorded access requests</span>
+        </div>
+
+        <div class="stat-card">
+            <p>Allowed</p>
+            <h2 id="auditAllowed">--</h2>
+            <span>Successful decisions</span>
+        </div>
+
+        <div class="stat-card">
+            <p>Denied</p>
+            <h2 id="auditDenied">--</h2>
+            <span>Rejected decisions</span>
+        </div>
+    </div>
+
+    <div class="panel">
+
+        <div class="panel-header">
+            <h3>Access Activity</h3>
+            <p>History of policy engine decisions.</p>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Action</th>
+                        <th>Resource</th>
+                        <th>Decision</th>
+                        <th>Reason</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+
+                <tbody id="auditTable">
+                    <tr>
+                        <td colspan="6">Audit records will appear here.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</section>
+<footer class="app-footer">
+    <p>Mini IAM & Policy Engine</p>
+    <p>Role-Based Access Control | Attribute-Based Access Control | Audit Logging</p>
+    <p>Developed as a Cloud Computing Project</p>
+</footer>
+        </main>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
