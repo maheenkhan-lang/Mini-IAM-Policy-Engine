@@ -36,13 +36,18 @@ public JwtAuthenticationFilter jwtAuthenticationFilter(
                     SessionCreationPolicy.STATELESS
                 )
             )
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers(
-                    "/api/auth/login",
-                    "/api/auth/validate"
-                ).permitAll()
-                .anyRequest().authenticated()
-            )
+           .authorizeHttpRequests(auth -> auth
+    .requestMatchers(
+        "/",
+        "/index.html",
+        "/dashboard.html",
+        "/css/**",
+        "/js/**",
+        "/api/auth/login",
+        "/api/auth/validate"
+    ).permitAll()
+    .anyRequest().authenticated()
+)
             .addFilterBefore(
                 jwtAuthenticationFilter,
                 UsernamePasswordAuthenticationFilter.class

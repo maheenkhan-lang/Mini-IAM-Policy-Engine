@@ -563,3 +563,27 @@ async function loadAuditLogs() {
 }
 
 loadAuditLogs();
+// Load total permissions
+async function loadPermissions() {
+    try {
+        const response = await fetch("/api/permissions", {
+            headers: {
+                "Authorization": "Bearer " + token
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error("Unable to load permissions");
+        }
+
+        const permissions = await response.json();
+
+        document.getElementById("totalPermissions").textContent =
+            permissions.length;
+
+    } catch (error) {
+        console.error("Permission loading error:", error);
+    }
+}
+
+loadPermissions();
